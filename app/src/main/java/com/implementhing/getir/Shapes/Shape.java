@@ -1,7 +1,11 @@
 package com.implementhing.getir.Shapes;
 
 import android.graphics.Color;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.widget.ImageView;
+
+import com.implementhing.getir.ToolBox.Tools;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -21,19 +25,7 @@ public abstract class Shape {
         this.color = "#" + color;
     }
 
-    public abstract String draw();
-
-    //Bir Stringin color olup olmadığını kontrol eder. Overload Method
-    private int getColor(final String hex, int color) {
-        int colorInt = color;
-        if (hex != null && !TextUtils.isEmpty(hex) && !hex.equals("")) {
-            Pattern pattern = Pattern.compile("^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$");
-            Matcher matcher = pattern.matcher(hex);
-            if (matcher.matches())
-                colorInt = Color.parseColor(hex);
-        }
-        return colorInt;
-    }
+    public abstract String draw(ImageView view, AppCompatActivity activity);
 
     public int getxPosition() {
         return xPosition;
@@ -51,9 +43,8 @@ public abstract class Shape {
         this.yPosition = yPosition;
     }
 
-
     public int getColor() {
-        return getColor(color, Color.BLACK);
+        return Tools.getColor(color, Color.BLACK);
     }
 
     public void setColor(String color) {

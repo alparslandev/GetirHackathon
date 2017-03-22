@@ -1,15 +1,16 @@
 package com.implementhing.getir;
 
-import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.TextView;
+import android.widget.ImageView;
 
 import com.google.gson.Gson;
+import com.implementhing.getir.ResponseModels.Element;
 import com.implementhing.getir.ResponseModels.GetirElementsResult;
 import com.implementhing.getir.Service.BundleKeys;
 import com.implementhing.getir.Service.WebServiceRequest;
 import com.implementhing.getir.Service.WebServiceResponseListener;
+import com.implementhing.getir.Shapes.Circle;
 import com.implementhing.getir.Shapes.Rectangle;
 
 public class GetirMainActivity extends AppCompatActivity {
@@ -18,9 +19,6 @@ public class GetirMainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_getir_main);
-        Rectangle rectangle = new Rectangle(1, 2, "222333", 1, 1);
-        ((TextView) findViewById(R.id.deneme)).setTextColor(rectangle.getColor());
-
         getGetirElementsWebService();
 
     }
@@ -48,10 +46,21 @@ public class GetirMainActivity extends AppCompatActivity {
             if (jsonString != null) {
                 Gson gson = new Gson();
                 GetirElementsResult elementsResult = gson.fromJson(jsonString, GetirElementsResult.class);
-
                 if (elementsResult != null && elementsResult.getMsg() != null && elementsResult.getMsg().equals("Success")){
-                    String s = "";
-                    s = "";
+                    ImageView imgDraw = (ImageView) findViewById(R.id.img_draw_shapes);
+
+                    if (elementsResult.getElements() != null && elementsResult.getElements().size() > 0) {
+                        for (Element item : elementsResult.getElements()) {
+                            if (item.getType().equals("circle")) {
+                                Circle circle = new Circle(item.getXPosition(),item.getYPosition(), item.getColor(), item.getR());
+                                circle.draw(imgDraw, GetirMainActivity.this);
+                            } else {
+                                Rectangle rectangle = new Rectangle(item.getXPosition(), item.getYPosition(), item.getColor(), item.getWidth(), item.getHeight());
+                                rectangle.draw(imgDraw, GetirMainActivity.this);
+                            }
+                        }
+
+                    }
                 }
             }
         }
