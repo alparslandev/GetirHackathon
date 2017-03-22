@@ -28,7 +28,7 @@ public class Circle extends Shape {
         this.radius = radius;
     }
 
-    public String draw(ImageView view, AppCompatActivity context, Bitmap bitmap) {
+    public void draw(ImageView view, AppCompatActivity context, Bitmap bitmap) {
         Canvas canvas = new Canvas(bitmap);
 
         Paint paint = new Paint();
@@ -36,7 +36,5 @@ public class Circle extends Shape {
         paint.setStyle(Paint.Style.FILL);
         int x = getxPosition(), y = getyPosition(), r = getRadius();
         canvas.drawCircle(x, y, r, paint);
-
-        return null;
     }
 }

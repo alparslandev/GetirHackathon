@@ -22,7 +22,7 @@ public abstract class Shape {
         this.color = "#" + color;
     }
 
-    public abstract String draw(ImageView view, AppCompatActivity activity, Bitmap bitmap);
+    public abstract void draw(ImageView view, AppCompatActivity activity, Bitmap bitmap);
 
     public int getxPosition() {
         return xPosition;

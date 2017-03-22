@@ -30,14 +30,12 @@ public class Rectangle extends Shape {
     }
 
     @Override
-    public String draw(ImageView view, AppCompatActivity context, Bitmap bitmap) {
+    public void draw(ImageView view, AppCompatActivity context, Bitmap bitmap) {
         Canvas canvas = new Canvas(bitmap);
 
         Paint paint = new Paint();
         paint.setColor(getColor());
         paint.setStyle(Paint.Style.FILL);
         canvas.drawRect(new Rect(getxPosition(),getyPosition(), getxPosition() + getWidth(), getyPosition() + getHeight() ), paint);
-
-        return null;
     }
 }
