@@ -1,14 +1,11 @@
 package com.implementhing.getir.Shapes;
 
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
 import android.widget.ImageView;
 
 import com.implementhing.getir.ToolBox.Tools;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Created by AlparslanSelçuk on 22.03.2017.
@@ -25,7 +22,7 @@ public abstract class Shape {
         this.color = "#" + color;
     }
 
-    public abstract String draw(ImageView view, AppCompatActivity activity);
+    public abstract String draw(ImageView view, AppCompatActivity activity, Bitmap bitmap);
 
     public int getxPosition() {
         return xPosition;
